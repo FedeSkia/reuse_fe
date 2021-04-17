@@ -25,7 +25,6 @@ export default class ItemsTable extends React.Component {
         axios.get('http://localhost:8080/item/all-items?page=0&size=10&sort=id')
             .then(response => {
                 let data = response.data;
-                debugger;
                 this.setState({
                     items: data.content,
                     empty: data.empty,
@@ -40,15 +39,26 @@ export default class ItemsTable extends React.Component {
                 })});
     }
 
-
+    renderTable(){
+        if(this.state.empty){
+            return(
+                <Container>
+                    Non vi sono elementi
+                </Container>)
+        } else {
+            return (
+                <Container>
+                    <Table
+                        empty={this.state.empty}
+                        items={this.state.items}
+                    />
+                </Container>)
+        }
+    }
 
     render() {
-        return (
-            <Container>
-                <Table
-                    items={this.state.items}
-                />
-            </Container>)
+        return(this.renderTable())
+
     }
 
 }

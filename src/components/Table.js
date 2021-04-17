@@ -8,16 +8,33 @@ export default class Table extends React.Component {
         super(props);
     }
 
+    renderHeaders(){
+        if(this.props.items){
+            const headers = this.createHeaders();
+            return(
+                <thead>
+                    <tr id={1}>
+                        {headers}
+                    </tr>
+                </thead>)
+        }
+    }
+
+    createHeaders() {
+        return ["Nome", "Descrizione"].map((header, index) => {
+            return (<th key={index}>{header}</th>);
+        });
+    }
+
     getItems() {
         if(this.props.items){
-            const items = this.props.items.map(item =>
+            return this.props.items.map(item =>
                 <Item key={item.id}
                       id={item.id}
                       name={item.name}
                       description={item.description}
                 />
             );
-            return items;
         } else {
             return "No Items found";
         }
@@ -25,10 +42,14 @@ export default class Table extends React.Component {
 
     render() {
         const items = this.getItems();
+        const headers = this.renderHeaders();
         return (
-            <>
-                {items}
-            </>
+            <table>
+                {headers}
+                <tbody>
+                    {items}
+                </tbody>
+            </table>
         )
     }
 
