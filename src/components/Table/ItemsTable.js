@@ -17,12 +17,16 @@ export default class ItemsTable extends React.Component {
             pageable: null,
             totalElements: 0,
             totalPages: 0,
-            size: 0
+            size: 10
         };
+        this.goNextPage = this.goNextPage.bind(this);
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:8080/item/all-items?page=0&size=10&sort=id')
+    loadItems(page, size, sort) {
+        axios.get('http://localhost:8080/item/all-items?' +
+            'page=' + page +
+            '&size='+ size +
+            '&sort='+ sort)
             .then(response => {
                 let data = response.data;
                 this.setState({
@@ -39,26 +43,32 @@ export default class ItemsTable extends React.Component {
                 })});
     }
 
+    componentDidMount() {
+        this.loadItems(this.state.number, this.state.size, "id");
+    }
+
+    goNextPage(){
+        this.loadItems(this.state.number + 1,  this.state.size, "id");
+    }
+
     renderTable(){
-        if(this.state.empty){
-            return(
-                <Container>
-                    Non vi sono elementi
-                </Container>)
-        } else {
-            return (
-                <Container>
-                    <Table
-                        empty={this.state.empty}
-                        items={this.state.items}
-                    />
-                </Container>)
-        }
+        return (
+            <Container>
+                <Table
+                    empty={this.state.empty}
+                    items={this.state.items}
+                    first={this.state.first}
+                    last={this.state.last}
+                    totalPages={this.state.totalPages}
+                    currentPage={this.state.number}
+                    goNextPage={this.goNextPage}
+                />
+            </Container>)
+
     }
 
     render() {
         return(this.renderTable())
-
     }
 
 }

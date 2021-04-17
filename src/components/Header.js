@@ -4,10 +4,6 @@ import {Col, Container, Image, Row} from "react-bootstrap";
 
 export default class Header extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return(
             <Container>

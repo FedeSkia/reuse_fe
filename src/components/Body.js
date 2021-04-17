@@ -1,6 +1,6 @@
 import React from "react";
 import {Container} from "react-bootstrap";
-import ItemsTable from "./ItemsTable";
+import ItemsTable from "./Table/ItemsTable";
 
 export default class Body extends React.Component {
 
