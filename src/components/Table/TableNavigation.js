@@ -4,7 +4,9 @@ import React from "react";
 export default class TableNavigation extends React.Component {
 
     renderGoBackButton() {
-        return <li className={`page-item ${this.props.first ? "disabled" : ""}`}>
+        return <li
+            onClick={() => this.canGoPreviousPage()}
+            className={`page-item ${this.props.first ? "disabled" : ""}`}>
             <a className="page-link" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span className="sr-only">Previous</span>
@@ -26,6 +28,11 @@ export default class TableNavigation extends React.Component {
     canGoNextPage() {
         if(!this.props.last)
             this.props.goNextPage()
+    }
+
+    canGoPreviousPage() {
+        if(!this.props.first)
+            this.props.goPreviousPage()
     }
 
     render() {

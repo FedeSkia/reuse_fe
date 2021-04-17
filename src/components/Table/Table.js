@@ -58,6 +58,7 @@ export default class Table extends React.Component {
                         last={this.props.last}
                         currentPage={this.props.currentPage}
                         goNextPage={this.props.goNextPage}
+                        goPreviousPage={this.props.goPreviousPage}
                     />
                 </Container>);
         }
