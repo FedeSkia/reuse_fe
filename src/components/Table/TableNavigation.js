@@ -1,7 +1,15 @@
 import React from "react";
+import {Button, Col, Container, Row} from "react-bootstrap";
 
 
 export default class TableNavigation extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state  = {
+            selectedPage: props.currentPage
+        };
+    }
 
     renderGoBackButton() {
         return <li
@@ -26,25 +34,42 @@ export default class TableNavigation extends React.Component {
     }
 
     canGoNextPage() {
-        if(!this.props.last)
+        if (!this.props.last)
             this.props.goNextPage()
     }
 
     canGoPreviousPage() {
-        if(!this.props.first)
+        if (!this.props.first)
             this.props.goPreviousPage()
     }
 
+    goToPage(event){
+        if(event.key === 'Enter')
+            this.props.goToPage(event.target.value);
+    }
+
     render() {
-        return(
-            <nav aria-label="Page navigation example">
-                <ul className="pagination">
-                    {this.renderGoBackButton()}
-                    <li className="page-item">
-                        <a className="page-link" href="#">{this.props.currentPage}</a>
-                    </li>
-                    {this.renderNextButton()}
-                </ul>
+        return (
+            <nav>
+                <Container>
+                    <Row>
+                        <Col>
+                            <ul className="pagination">
+                                {this.renderGoBackButton()}
+                                <li className="page-item">
+                                    <a className="page-link" href="#">{this.props.currentPage}</a>
+                                </li>
+                                {this.renderNextButton()}
+                            </ul>
+                        </Col>
+                        <Col>
+                            <input className="form-control form-control-sm"
+                                   type="number"
+                                   placeholder="Naviga alla pagina"
+                                   onKeyPress={(e) => this.goToPage(e)}/>
+                        </Col>
+                    </Row>
+                </Container>
             </nav>
         );
     }

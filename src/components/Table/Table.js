@@ -20,7 +20,7 @@ export default class Table extends React.Component {
 
     createHeaders() {
         return ["Nome", "Descrizione"].map((header, index) => {
-            return (<th key={index}>{header}</th>);
+            return (<th scope={"col"} key={index}>{header}</th>);
         });
     }
 
@@ -47,7 +47,7 @@ export default class Table extends React.Component {
         } else {
             return (
                 <Container>
-                    <table>
+                    <table className={"table"}>
                         {this.renderHeaders()}
                         <tbody>
                         {this.getItems()}
@@ -59,6 +59,7 @@ export default class Table extends React.Component {
                         currentPage={this.props.currentPage}
                         goNextPage={this.props.goNextPage}
                         goPreviousPage={this.props.goPreviousPage}
+                        goToPage={this.props.goToPage}
                     />
                 </Container>);
         }
