@@ -1,10 +1,10 @@
 import React from "react";
 import Item from "./Item";
-import {Container} from "react-bootstrap";
+import {Container, Table} from "react-bootstrap";
 import TableNavigation from "./TableNavigation";
 
 
-export default class Table extends React.Component {
+export default class MyTable extends React.Component {
 
     renderHeaders() {
         if (this.props.items) {
@@ -47,12 +47,12 @@ export default class Table extends React.Component {
         } else {
             return (
                 <Container>
-                    <table>
+                    <Table>
                         {this.renderHeaders()}
                         <tbody>
                         {this.getItems()}
                         </tbody>
-                    </table>
+                    </Table>
                     <TableNavigation
                         first={this.props.first}
                         last={this.props.last}

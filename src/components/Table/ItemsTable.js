@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Table from "./Table";
+import MyTable from "./MyTable";
 import {Container} from "react-bootstrap";
 
 export default class ItemsTable extends React.Component {
@@ -59,7 +59,7 @@ export default class ItemsTable extends React.Component {
     renderTable(){
         return (
             <Container>
-                <Table
+                <MyTable
                     empty={this.state.empty}
                     items={this.state.items}
                     first={this.state.first}
