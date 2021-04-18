@@ -56,9 +56,11 @@ export default class MyTable extends React.Component {
                     <TableNavigation
                         first={this.props.first}
                         last={this.props.last}
+                        size={this.props.size}
                         currentPage={this.props.currentPage}
                         goNextPage={this.props.goNextPage}
                         goPreviousPage={this.props.goPreviousPage}
+                        changePageSize={this.props.changePageSize}
                     />
                 </Container>);
         }

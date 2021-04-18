@@ -3,6 +3,14 @@ import React from "react";
 
 export default class TableNavigation extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            possiblePageSize: [5, 10, 20]
+        };
+        this.handleChangePageSize = this.handleChangePageSize.bind(this);
+    }
+
     renderGoBackButton() {
         return <li
             onClick={() => this.canGoPreviousPage()}
@@ -26,28 +34,44 @@ export default class TableNavigation extends React.Component {
     }
 
     canGoNextPage() {
-        if(!this.props.last)
+        if (!this.props.last)
             this.props.goNextPage()
     }
 
     canGoPreviousPage() {
-        if(!this.props.first)
+        if (!this.props.first)
             this.props.goPreviousPage()
     }
 
+    handleChangePageSize(event) {
+        this.props.changePageSize(event.target.value);
+    }
+
+    numberOfElements() {
+        return (
+            <div>
+                Numero elementi
+                <select value={this.props.size} onChange={this.handleChangePageSize}>
+                    {this.state.possiblePageSize.map((value) => {
+                        return (<option key={value} value={value}>{value}</option>);
+                    })}
+                </select>
+            </div>);
+    }
+
     render() {
-        return(
-            <nav aria-label="Page navigation example">
+        return (
+            <nav>
                 <ul className="pagination">
                     {this.renderGoBackButton()}
                     <li className="page-item">
                         <a className="page-link" href="#">{this.props.currentPage}</a>
                     </li>
                     {this.renderNextButton()}
+                    {this.numberOfElements()}
                 </ul>
             </nav>
         );
     }
-
 
 }

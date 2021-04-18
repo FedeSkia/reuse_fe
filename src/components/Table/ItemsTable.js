@@ -21,6 +21,7 @@ export default class ItemsTable extends React.Component {
         };
         this.goNextPage = this.goNextPage.bind(this);
         this.goPreviousPage = this.goPreviousPage.bind(this);
+        this.changePageSize = this.changePageSize.bind(this);
     }
 
     loadItems(page, size, sort) {
@@ -56,6 +57,10 @@ export default class ItemsTable extends React.Component {
         this.loadItems(this.state.number - 1,  this.state.size, "id");
     }
 
+    changePageSize(size){
+        this.loadItems(this.state.number,  size, "id");
+    }
+
     renderTable(){
         return (
             <Container>
@@ -64,7 +69,9 @@ export default class ItemsTable extends React.Component {
                     items={this.state.items}
                     first={this.state.first}
                     last={this.state.last}
+                    size={this.state.size}
                     totalPages={this.state.totalPages}
+                    changePageSize={this.changePageSize}
                     currentPage={this.state.number}
                     goNextPage={this.goNextPage}
                     goPreviousPage={this.goPreviousPage}
